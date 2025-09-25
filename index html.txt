@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undangan Fitria & Fandi</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('https://images.unsplash.com/photo-1529634890322-6d8d4a1d4f3b?auto=format&fit=crop&w=1200&q=80') no-repeat center center fixed;
+      background-size: cover;
+      overflow: hidden;
+    }
+    .overlay {
+      background: rgba(0,0,0,0.5);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+    h1 { color: #b85c38; }
+    h2 { margin: 10px 0; }
+    p { color: #444; }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      background: #b85c38;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .btn:hover { background: #8a3d25; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Countdown */
+    #countdown {
+      font-size: 1.5em;
+      margin: 15px 0;
+      color: #b85c38;
+    }
+    /* Bunga jatuh */
+    .flower {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      animation: fall linear forwards;
+    }
+    @keyframes fall {
+      to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="card">
+      <h1>Undangan Pernikahan</h1>
+      <p>Dengan penuh kebahagiaan, kami mengundang Anda pada acara pernikahan:</p>
+      <h2>Fitria & Fandy</h2>
+      <p><b>Tanggal:</b> Sabtu, 10 Januari 2026</p>
+      <p><b>Waktu:</b> 15.00 WIB</p>
+      <p><b>Tempat:</b> Mojokerto</p>
+
+      <!-- Countdown -->
+      <div id="countdown"></div>
+
+      <!-- Tombol -->
+      <a class="btn" href="https://maps.app.goo.gl/" target="_blank">Lihat Lokasi</a>
+      <a class="btn" href="https://wa.me/6281234567890" target="_blank">Konfirmasi Kehadiran</a>
+
+      <p style="margin-top:20px; font-style: italic;">
+        Kehadiran Bapak/Ibu/Saudara/i merupakan kehormatan dan kebahagiaan bagi kami.
+      </p>
+
+      <!-- Musik -->
+      <audio autoplay loop>
+        <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+      </audio>
+    </div>
+  </div>
+
+  <!-- Script Countdown -->
+  <script>
+    const targetDate = new Date("Jan 10, 2026 15:00:00").getTime();
+    const countdownEl = document.getElementById("countdown");
+    setInterval(function(){
+      let now = new Date().getTime();
+      let distance = targetDate - now;
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdownEl.innerHTML = `Hitung Mundur: ${days}h ${hours}j ${minutes}m ${seconds}d`;
+      if (distance < 0) { countdownEl.innerHTML = "Acara sedang berlangsung 🎉"; }
+    }, 1000);
+  </script>
+
+  <!-- Script Bunga Jatuh -->
+  <script>
+    function createFlower() {
+      const flower = document.createElement("div");
+      flower.innerHTML = "🌸";
+      flower.classList.add("flower");
+      flower.style.left = Math.random() * window.innerWidth + "px";
+      flower.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(flower);
+      setTimeout(() => flower.remove(), 5000);
+    }
+    setInterval(createFlower, 500);
+  </script>
+</body>
+</html>
